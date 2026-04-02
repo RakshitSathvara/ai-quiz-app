@@ -383,7 +383,7 @@ const validateEmail = (email: string): boolean => {
    - Numbers in `font-display text-2xl font-bold text-white`, labels in `text-surface-400 text-sm`
 
 3. **Registration form** (`quiz-card p-8 space-y-6`):
-   - Full Name: `<input>` with `input-field` class, placeholder "e.g. Rakshit Sharma"
+   - Full Name: `<input>` with `input-field` class, placeholder "e.g. Your Name"
    - Office Email: `<input type="email">` with `input-field` class, placeholder "you@tmspl.com"
    - Helper text below email: `"Only @tmspl.com email addresses are accepted"` in `text-xs text-surface-500`
    - Error messages: `text-sm text-incorrect` with warning SVG icon

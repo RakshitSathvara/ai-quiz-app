@@ -110,7 +110,7 @@ export default function Home() {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="e.g. Rakshit Sharma"
+              placeholder="e.g. Your Name"
               className="input-field"
             />
             {errors.name && (
