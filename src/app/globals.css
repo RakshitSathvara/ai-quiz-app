@@ -1,9 +1,32 @@
+/* Quiz page fonts (Quicksand, Nunito, JetBrains Mono) */
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700;800&family=Nunito:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+/* Admin neobrutalism fonts (Syne, Space Grotesk, Inter, Space Mono) */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@800&family=Space+Grotesk:wght@400;700&family=Inter:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap');
 
 @import "tailwindcss";
 
 @theme inline {
-  /* ── Primary / Brand (clay primary #5B8DEF) ── */
+  /* ── Neobrutalism Colors ── */
+  --color-nb-black: #000000;
+  --color-nb-white: #FFFDF5;
+  --color-nb-yellow: #FFD23F;
+  --color-nb-pink: #FF6B6B;
+  --color-nb-blue: #74B9FF;
+  --color-nb-green: #88D498;
+  --color-nb-orange: #FFA552;
+  --color-nb-lavender: #B8A9FA;
+  --color-nb-surface: #FFFDF5;
+  --color-nb-surface-alt: #FFF3E0;
+  --color-nb-surface-muted: #F5F0E8;
+  --color-nb-surface-elevated: #FFFFFF;
+
+  /* ── Semantic / Feedback (original quiz palette) ── */
+  --color-correct: #48c782;
+  --color-incorrect: #eb5757;
+  --color-warning: #f5b43c;
+  --color-info: #8278d2;
+
+  /* ── Legacy brand mapping (for quiz pages that still use old tokens) ── */
   --color-brand-50: #ebf0ff;
   --color-brand-100: #d6e2ff;
   --color-brand-200: #b0c7ff;
@@ -16,7 +39,6 @@
   --color-brand-900: #1e458b;
   --color-brand-950: #112759;
 
-  /* ── Surface (clay canvas tones) ── */
   --color-surface-50: #f0ecf6;
   --color-surface-100: #e8e4ef;
   --color-surface-200: #d8d4e0;
@@ -29,29 +51,40 @@
   --color-surface-900: #0d1225;
   --color-surface-950: #0b0f1a;
 
-  /* ── Semantic / Feedback ── */
-  --color-correct: #48c782;
-  --color-incorrect: #eb5757;
-  --color-warning: #f5b43c;
-  --color-info: #8278d2;
+  /* ── Neobrutalism Shadows ── */
+  --shadow-nb-sm: 3px 3px 0 0 #000;
+  --shadow-nb: 5px 5px 0 0 #000;
+  --shadow-nb-lg: 8px 8px 0 0 #000;
+  --shadow-nb-xl: 12px 12px 0 0 #000;
 
-  /* ── Fonts ── */
-  --font-sans: 'Nunito', 'Quicksand', ui-sans-serif, system-ui, sans-serif;
-  --font-display: 'Quicksand', 'Nunito', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  /* ── Neobrutalism Radii ── */
+  --radius-nb-none: 0px;
+  --radius-nb-sm: 4px;
+  --radius-nb-base: 8px;
 
-  /* ── Clay shadows ── */
+  /* ── Legacy clay shadows (for quiz pages) ── */
   --shadow-clay: 6px 6px 14px rgba(0,0,0,0.55), -3px -3px 10px rgba(255,255,255,0.04), inset 2px 2px 4px rgba(255,255,255,0.07), inset -2px -2px 4px rgba(0,0,0,0.30);
   --shadow-clay-deep: 10px 10px 22px rgba(0,0,0,0.60), -5px -5px 14px rgba(255,255,255,0.05), inset 2px 2px 5px rgba(255,255,255,0.08), inset -2px -2px 5px rgba(0,0,0,0.35);
   --shadow-clay-hover: 8px 8px 18px rgba(0,0,0,0.60), -4px -4px 12px rgba(255,255,255,0.05), inset 2px 2px 5px rgba(255,255,255,0.08), inset -2px -2px 5px rgba(0,0,0,0.32);
   --shadow-clay-press: 3px 3px 6px rgba(0,0,0,0.45), inset 3px 3px 6px rgba(0,0,0,0.35), inset -2px -2px 4px rgba(255,255,255,0.05);
   --shadow-clay-inset: inset 2px 2px 5px rgba(0,0,0,0.35), inset -1px -1px 3px rgba(255,255,255,0.05);
 
-  /* ── Clay radii ── */
+  /* ── Legacy clay radii ── */
   --radius-clay-sm: 10px;
   --radius-clay: 18px;
   --radius-clay-lg: 24px;
   --radius-clay-xl: 32px;
+
+  /* ── Fonts (quiz pages use these Tailwind tokens) ── */
+  --font-sans: 'Nunito', 'Quicksand', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Quicksand', 'Nunito', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* ── Neobrutalism fonts (admin pages use inline styles) ── */
+  --font-nb-display: 'Syne', 'Arial Black', sans-serif;
+  --font-nb-heading: 'Space Grotesk', system-ui, sans-serif;
+  --font-nb-body: 'Inter', system-ui, sans-serif;
+  --font-nb-mono: 'Space Mono', 'Menlo', monospace;
 
   /* ── Animations ── */
   --animate-fade-in: fade-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -60,6 +93,9 @@
   --animate-progress: progress 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
   --animate-float: float 3s ease-in-out infinite;
   --animate-glow-pulse: glow-pulse 2s ease-in-out infinite;
+  --animate-nb-slide-in: nb-slide-in 0.3s ease;
+  --animate-nb-shake: nb-shake 0.3s ease;
+  --animate-nb-count-up: nb-count-up 0.6s ease;
 
   @keyframes fade-in {
     from { opacity: 0; }
@@ -93,6 +129,19 @@
     from { opacity: 0; transform: translateY(-14px); }
     to { opacity: 1; transform: translateY(0); }
   }
+  @keyframes nb-slide-in {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes nb-shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-3px); }
+    75% { transform: translateX(3px); }
+  }
+  @keyframes nb-count-up {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 }
 
 /* ── Base ── */
@@ -101,6 +150,12 @@ body {
   color: #e8e4ef;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Neobrutalism body override for admin pages ── */
+body.nb-theme {
+  background: #FFFDF5;
+  color: #000000;
 }
 
 /* ── Scrollbar ── */
@@ -116,6 +171,17 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #2a3555;
+}
+
+/* Neobrutalism scrollbar */
+.nb-theme ::-webkit-scrollbar-track,
+.nb-theme::-webkit-scrollbar-track {
+  background: #F5F0E8;
+}
+.nb-theme ::-webkit-scrollbar-thumb,
+.nb-theme::-webkit-scrollbar-thumb {
+  background: #000000;
+  border-radius: 0;
 }
 
 /* ── Noise overlay (subtle grain) ── */
@@ -140,7 +206,7 @@ body {
   }
 }
 
-/* ══════════════ Component Classes — Dark Claymorphism ══════════════ */
+/* ══════════════ Component Classes — Dark Claymorphism (Quiz pages) ══════════════ */
 @layer components {
 
   /* ── Main card / container ── */
@@ -366,5 +432,192 @@ body {
     border: 1px solid rgba(245, 180, 60, 0.20);
     border-radius: 16px;
     box-shadow: var(--shadow-clay-inset);
+  }
+
+  /* ══════════════ Neobrutalism Component Classes (Admin pages) ══════════════ */
+
+  /* ── NB Card ── */
+  .nb-card {
+    background: #FFFDF5;
+    border: 3px solid #000;
+    box-shadow: 5px 5px 0 0 #000;
+    padding: 24px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .nb-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0 0 #000;
+  }
+
+  /* ── NB Stat Card ── */
+  .nb-stat-card {
+    border: 4px solid #000;
+    box-shadow: 8px 8px 0 0 #000;
+    padding: 24px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .nb-stat-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 10px 10px 0 0 #000;
+  }
+
+  /* ── NB Button Primary ── */
+  .nb-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 12px 24px;
+    background: #FFD23F;
+    color: #000;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    border: 3px solid #000;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 5px 5px 0 0 #000;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .nb-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0 0 #000;
+  }
+  .nb-btn:active {
+    transform: translate(3px, 3px);
+    box-shadow: none;
+  }
+  .nb-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* ── NB Button Secondary ── */
+  .nb-btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 12px 24px;
+    background: #FFFDF5;
+    color: #000;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    border: 3px solid #000;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 5px 5px 0 0 #000;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .nb-btn-secondary:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0 0 #000;
+  }
+  .nb-btn-secondary:active {
+    transform: translate(3px, 3px);
+    box-shadow: none;
+  }
+
+  /* ── NB Button Danger ── */
+  .nb-btn-danger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 12px 24px;
+    background: #FF6B6B;
+    color: #000;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    border: 3px solid #000;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 5px 5px 0 0 #000;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .nb-btn-danger:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0 0 #000;
+  }
+  .nb-btn-danger:active {
+    transform: translate(3px, 3px);
+    box-shadow: none;
+  }
+
+  /* ── NB Input ── */
+  .nb-input {
+    width: 100%;
+    padding: 12px 16px;
+    background: #FFFDF5;
+    border: 2px solid #000;
+    border-radius: 4px;
+    color: #000;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.1s ease, box-shadow 0.1s ease;
+  }
+  .nb-input::placeholder {
+    color: rgba(0, 0, 0, 0.5);
+  }
+  .nb-input:focus {
+    border: 3px solid #74B9FF;
+    box-shadow: 3px 3px 0 0 #74B9FF;
+    outline: none;
+  }
+
+  /* ── NB Badge / Status Pill ── */
+  .nb-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: 2px solid #000;
+    border-radius: 4px;
+    box-shadow: 3px 3px 0 0 #000;
+  }
+  .nb-badge-pass {
+    background: #88D498;
+    color: #000;
+  }
+  .nb-badge-fail {
+    background: #FF6B6B;
+    color: #000;
+  }
+  .nb-badge-review {
+    background: #FFA552;
+    color: #000;
+  }
+  .nb-badge-info {
+    background: #74B9FF;
+    color: #000;
+  }
+  .nb-badge-neutral {
+    background: #F5F0E8;
+    color: #000;
+  }
+
+  /* ── NB Focus Ring ── */
+  .nb-focus:focus-visible {
+    outline: 3px solid #74B9FF;
+    outline-offset: 2px;
+  }
+
+  /* ── NB Progress Bar ── */
+  .nb-progress-track {
+    height: 12px;
+    background: #F5F0E8;
+    border: 2px solid #000;
+  }
+  .nb-progress-fill {
+    height: 100%;
+    transition: width 0.6s ease;
   }
 }

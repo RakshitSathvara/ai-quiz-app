@@ -11,21 +11,23 @@ function getFirebaseAdmin(): Firestore {
     return _db;
   }
 
-  const raw = process.env.FIREBASE_SERVICE_ACCOUNT_KEY || "{}";
-  let serviceAccount: ServiceAccount;
+  const raw = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
+  let parsed: Record<string, string> | null = null;
 
-  try {
-    serviceAccount = JSON.parse(raw);
-  } catch {
-    console.warn("FIREBASE_SERVICE_ACCOUNT_KEY is not valid JSON — Firebase writes will fail.");
-    serviceAccount = {} as ServiceAccount;
+  if (raw) {
+    try {
+      parsed = JSON.parse(raw);
+    } catch {
+      console.warn("FIREBASE_SERVICE_ACCOUNT_KEY is not valid JSON — Firebase writes will fail.");
+    }
   }
 
   try {
-    initializeApp({
-      credential: cert(serviceAccount),
-      projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-    });
+    if (parsed && parsed.project_id) {
+      initializeApp({ credential: cert(parsed as ServiceAccount) });
+    } else {
+      initializeApp({ projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID });
+    }
   } catch (e) {
     console.warn("Firebase Admin initialization failed:", e);
   }

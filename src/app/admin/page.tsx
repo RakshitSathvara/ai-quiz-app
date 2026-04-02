@@ -25,28 +25,41 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="w-full max-w-md animate-fade-in">
-        <form onSubmit={handleSubmit} className="quiz-card glow-border p-8">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-nb-white">
+      <div className="w-full max-w-md animate-nb-slide-in">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-nb-white border-3 border-nb-black shadow-nb-lg p-8"
+          style={{ border: "3px solid #000", boxShadow: "8px 8px 0 0 #000" }}
+        >
           {/* Icon */}
           <div className="flex justify-center mb-6">
-            <div className="w-12 h-12 rounded-xl bg-brand-500/10 flex items-center justify-center">
+            <div
+              className="w-16 h-16 bg-nb-yellow flex items-center justify-center"
+              style={{ border: "3px solid #000", boxShadow: "4px 4px 0 0 #000" }}
+            >
               <svg
-                className="w-6 h-6 text-brand-400"
+                className="w-8 h-8 text-nb-black"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                strokeWidth={1.5}
+                strokeWidth={2}
               >
                 <path d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
               </svg>
             </div>
           </div>
 
-          <h1 className="font-display text-2xl font-bold text-white text-center mb-1">
+          <h1
+            className="text-center mb-1"
+            style={{ fontFamily: "'Syne', 'Arial Black', sans-serif", fontWeight: 800, fontSize: "2.25rem", letterSpacing: "-0.02em", color: "#000" }}
+          >
             Admin Login
           </h1>
-          <p className="text-surface-400 text-sm text-center mb-8">
+          <p
+            className="text-center mb-8"
+            style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: "0.875rem", color: "#000", opacity: 0.6 }}
+          >
             Access the quiz results dashboard
           </p>
 
@@ -54,7 +67,8 @@ export default function AdminLoginPage() {
             <div>
               <label
                 htmlFor="admin-email"
-                className="block text-sm font-medium text-surface-300 mb-2"
+                className="block mb-2"
+                style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontWeight: 700, fontSize: "0.875rem", color: "#000" }}
               >
                 Email
               </label>
@@ -64,7 +78,7 @@ export default function AdminLoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="admin@tmspl.com"
-                className="input-field"
+                className="nb-input"
                 required
               />
             </div>
@@ -72,7 +86,8 @@ export default function AdminLoginPage() {
             <div>
               <label
                 htmlFor="admin-password"
-                className="block text-sm font-medium text-surface-300 mb-2"
+                className="block mb-2"
+                style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontWeight: 700, fontSize: "0.875rem", color: "#000" }}
               >
                 Password
               </label>
@@ -82,15 +97,18 @@ export default function AdminLoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter password"
-                className="input-field"
+                className="nb-input"
                 required
               />
             </div>
 
             {error && (
-              <p className="text-sm text-incorrect flex items-center gap-1.5">
+              <div
+                className="flex items-center gap-2 p-3 animate-nb-shake"
+                style={{ background: "#FF6B6B", border: "2px solid #000", fontFamily: "'Space Mono', monospace", fontSize: "0.875rem", fontWeight: 700 }}
+              >
                 <svg
-                  className="w-4 h-4 shrink-0"
+                  className="w-5 h-5 shrink-0"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -99,13 +117,13 @@ export default function AdminLoginPage() {
                   <path d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
                 </svg>
                 {error}
-              </p>
+              </div>
             )}
 
             <button
               type="submit"
               disabled={isLoading}
-              className="btn-primary w-full"
+              className="nb-btn w-full"
             >
               {isLoading ? (
                 <>
@@ -138,7 +156,7 @@ export default function AdminLoginPage() {
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
-                    strokeWidth={2}
+                    strokeWidth={2.5}
                   >
                     <path d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
                   </svg>
@@ -148,7 +166,10 @@ export default function AdminLoginPage() {
           </div>
         </form>
 
-        <p className="text-surface-500 text-xs mt-6 text-center">
+        <p
+          className="text-center mt-6"
+          style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.75rem", color: "#000", opacity: 0.5 }}
+        >
           TM Systems Pvt. Ltd. — AI Foundations Training Programme
         </p>
       </div>

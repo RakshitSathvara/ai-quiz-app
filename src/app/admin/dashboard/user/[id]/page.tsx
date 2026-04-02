@@ -54,25 +54,14 @@ export default function UserDetailPage() {
     }
   };
 
-  const resultColor = (res: string) => {
-    switch (res) {
-      case "Pass":
-        return "text-correct";
-      case "Needs Review":
-        return "text-warning";
-      default:
-        return "text-incorrect";
-    }
-  };
-
   const resultBadgeClass = (res: string) => {
     switch (res) {
       case "Pass":
-        return "bg-correct/10 text-correct border border-correct/20";
+        return "nb-badge nb-badge-pass";
       case "Needs Review":
-        return "bg-warning/10 text-warning border border-warning/20";
+        return "nb-badge nb-badge-review";
       default:
-        return "bg-incorrect/10 text-incorrect border border-incorrect/20";
+        return "nb-badge nb-badge-fail";
     }
   };
 
@@ -82,8 +71,8 @@ export default function UserDetailPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="flex items-center gap-3 text-surface-400">
+      <div className="min-h-screen flex items-center justify-center bg-nb-white">
+        <div className="flex items-center gap-3" style={{ fontFamily: "'Space Mono', monospace", color: "#000" }}>
           <svg
             className="w-5 h-5 animate-spin"
             fill="none"
@@ -111,26 +100,38 @@ export default function UserDetailPage() {
 
   if (error || !result) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-4">
-        <div className="glass-card p-8 max-w-md text-center">
-          <svg
-            className="w-16 h-16 text-incorrect/60 mx-auto mb-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={1.5}
+      <div className="min-h-screen flex items-center justify-center p-4 bg-nb-white">
+        <div
+          className="p-6 sm:p-8 max-w-md w-full text-center"
+          style={{ background: "#FFFDF5", border: "3px solid #000", boxShadow: "6px 6px 0 0 #000" }}
+        >
+          <div
+            className="w-14 h-14 mx-auto mb-4 flex items-center justify-center"
+            style={{ background: "#FF6B6B", border: "3px solid #000", boxShadow: "3px 3px 0 0 #000" }}
           >
-            <path d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
-          </svg>
-          <h2 className="font-display text-xl font-bold text-white mb-2">
+            <svg
+              className="w-7 h-7"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="#000"
+              strokeWidth={2}
+            >
+              <path d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+            </svg>
+          </div>
+          <h2
+            className="mb-2"
+            style={{ fontFamily: "'Syne', 'Arial Black', sans-serif", fontWeight: 800, fontSize: "1.25rem", color: "#000" }}
+          >
             Result Not Found
           </h2>
-          <p className="text-surface-400 mb-6">
+          <p style={{ fontFamily: "'Inter', system-ui, sans-serif", fontSize: "0.875rem", color: "#000", opacity: 0.6, marginBottom: "20px" }}>
             {error || "The requested quiz result could not be loaded."}
           </p>
           <button
             onClick={() => router.push("/admin/dashboard")}
-            className="btn-primary"
+            className="nb-btn"
+            style={{ fontSize: "0.875rem", padding: "10px 20px" }}
           >
             Back to Dashboard
           </button>
@@ -143,123 +144,147 @@ export default function UserDetailPage() {
   const incorrectCount = result.answers.length - correctCount;
 
   return (
-    <div className="min-h-screen p-4 sm:p-6 lg:p-8 max-w-5xl mx-auto animate-fade-in">
+    <div className="min-h-screen bg-nb-white p-4 sm:p-6 lg:p-8 max-w-5xl mx-auto animate-nb-slide-in">
       {/* Back navigation */}
       <button
         onClick={() => router.push("/admin/dashboard")}
-        className="flex items-center gap-2 text-surface-400 hover:text-brand-400 transition-colors mb-6 group"
+        className="flex items-center gap-2 mb-5 group"
+        style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontWeight: 700, fontSize: "0.875rem", color: "#000", background: "none", border: "none", cursor: "pointer" }}
       >
         <svg
-          className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform"
+          className="w-4 h-4 group-hover:-translate-x-1 transition-transform"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
-          strokeWidth={2}
+          strokeWidth={2.5}
         >
           <path d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
         </svg>
-        <span className="text-sm font-medium">Back to Dashboard</span>
+        Back to Dashboard
       </button>
 
       {/* User Header Card */}
-      <div className="glass-header p-6 sm:p-8 mb-8">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
-          {/* Avatar */}
-          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-brand-500/20 flex items-center justify-center shrink-0">
-            <span className="font-display text-2xl sm:text-3xl font-bold text-brand-400">
+      <div
+        className="p-4 sm:p-6 mb-6 sm:mb-8"
+        style={{ background: "#FFD23F", border: "3px solid #000", boxShadow: "4px 4px 0 0 #000" }}
+      >
+        {/* Top row: avatar + name */}
+        <div className="flex items-center gap-3 sm:gap-4 mb-3">
+          <div
+            className="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center shrink-0"
+            style={{ background: "#FFFDF5", border: "3px solid #000", boxShadow: "3px 3px 0 0 #000" }}
+          >
+            <span style={{ fontFamily: "'Syne', 'Arial Black', sans-serif", fontWeight: 800, fontSize: "clamp(1.25rem, 4vw, 2rem)", color: "#000" }}>
               {result.developerName.charAt(0).toUpperCase()}
             </span>
           </div>
-
-          {/* Info */}
-          <div className="flex-1 min-w-0">
-            <h1 className="font-display text-2xl sm:text-3xl font-bold text-white truncate">
+          <div className="min-w-0">
+            <h1
+              className="truncate"
+              style={{ fontFamily: "'Syne', 'Arial Black', sans-serif", fontWeight: 800, fontSize: "clamp(1.25rem, 5vw, 2.25rem)", letterSpacing: "-0.02em", color: "#000" }}
+            >
               {result.developerName}
             </h1>
-            <p className="text-surface-400 mt-1">{result.email}</p>
-            <div className="flex items-center gap-2 text-surface-500 text-sm mt-2">
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={1.5}
-              >
-                <path d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-              </svg>
-              Submitted: {formatDate(result.submittedAt)}
-            </div>
+            <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "clamp(0.7rem, 2.5vw, 0.875rem)", color: "#000", opacity: 0.7 }}>
+              {result.email}
+            </p>
           </div>
+        </div>
 
-          {/* Stat Pills */}
-          <div className="flex flex-wrap gap-3 sm:shrink-0">
-            <div className="glass-card px-5 py-3 text-center">
-              <p className="font-display text-xl font-bold text-white">
-                {result.totalScore}
-                <span className="text-sm text-surface-400">/15</span>
-              </p>
-              <p className="text-xs text-surface-500">Score</p>
-            </div>
-            <div className="glass-card px-5 py-3 text-center">
-              <p
-                className={`font-display text-xl font-bold ${resultColor(result.result)}`}
-              >
-                {result.percentage}%
-              </p>
-              <p className="text-xs text-surface-500">Percentage</p>
-            </div>
-            <div className="flex items-center">
-              <span className={`tag ${resultBadgeClass(result.result)}`}>
-                {result.result}
-              </span>
-            </div>
+        {/* Submitted date */}
+        <div className="flex items-center gap-2 mb-4" style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.7rem", color: "#000", opacity: 0.6 }}>
+          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+          </svg>
+          Submitted: {formatDate(result.submittedAt)}
+        </div>
+
+        {/* Stat Pills - always horizontal, wrapping */}
+        <div className="flex flex-wrap gap-2 sm:gap-3">
+          <div
+            className="px-3 sm:px-4 py-2 text-center"
+            style={{ background: "#FFFDF5", border: "2px solid #000", boxShadow: "3px 3px 0 0 #000" }}
+          >
+            <p style={{ fontFamily: "'Syne', 'Arial Black', sans-serif", fontWeight: 800, fontSize: "clamp(1rem, 3vw, 1.5rem)", color: "#000", lineHeight: 1.2 }}>
+              {result.totalScore}
+              <span style={{ fontSize: "0.7em", opacity: 0.5 }}>/15</span>
+            </p>
+            <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.6rem", color: "#000", opacity: 0.6, textTransform: "uppercase" }}>Score</p>
+          </div>
+          <div
+            className="px-3 sm:px-4 py-2 text-center"
+            style={{
+              background: result.result === "Pass" ? "#88D498" : result.result === "Needs Review" ? "#FFA552" : "#FF6B6B",
+              border: "2px solid #000",
+              boxShadow: "3px 3px 0 0 #000",
+            }}
+          >
+            <p style={{ fontFamily: "'Syne', 'Arial Black', sans-serif", fontWeight: 800, fontSize: "clamp(1rem, 3vw, 1.5rem)", color: "#000", lineHeight: 1.2 }}>
+              {result.percentage}%
+            </p>
+            <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.6rem", color: "#000", opacity: 0.6, textTransform: "uppercase" }}>Percentage</p>
+          </div>
+          <div className="flex items-center">
+            <span className={resultBadgeClass(result.result)} style={{ fontSize: "0.65rem", padding: "3px 10px" }}>
+              {result.result}
+            </span>
           </div>
         </div>
       </div>
 
       {/* Score Breakdown */}
-      <div className="glass-card p-6 mb-8">
-        <h2 className="font-display text-lg font-semibold text-white mb-5">
+      <div
+        className="p-4 sm:p-6 mb-6 sm:mb-8"
+        style={{ background: "#FFFDF5", border: "3px solid #000", boxShadow: "4px 4px 0 0 #000" }}
+      >
+        <h2
+          className="mb-4 sm:mb-5"
+          style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontWeight: 700, fontSize: "1.125rem", color: "#000" }}
+        >
           Score Breakdown
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div>
             <div className="flex justify-between items-center mb-2">
-              <span className="text-sm text-surface-300">
+              <span style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontWeight: 700, fontSize: "0.8rem", color: "#000" }}>
                 LLM Architecture
               </span>
-              <span className="text-sm font-mono text-white">
+              <span style={{ fontFamily: "'Space Mono', monospace", fontWeight: 700, fontSize: "0.8rem", color: "#000" }}>
                 {result.llmScore} / 5
               </span>
             </div>
-            <div className="h-3 bg-surface-800/60 rounded-full overflow-hidden">
+            <div className="nb-progress-track overflow-hidden">
               <div
-                className="h-full bg-brand-500 rounded-full animate-progress"
-                style={{ width: `${(result.llmScore / 5) * 100}%` }}
+                className="nb-progress-fill"
+                style={{
+                  width: `${(result.llmScore / 5) * 100}%`,
+                  background: result.llmScore / 5 >= 0.6 ? "#88D498" : "#FF6B6B",
+                }}
               />
             </div>
-            <p className="text-xs text-surface-500 mt-1">
+            <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.7rem", color: "#000", opacity: 0.5, marginTop: "4px" }}>
               {Math.round((result.llmScore / 5) * 100)}% correct
             </p>
           </div>
           <div>
             <div className="flex justify-between items-center mb-2">
-              <span className="text-sm text-surface-300">
+              <span style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontWeight: 700, fontSize: "0.8rem", color: "#000" }}>
                 Prompt Engineering
               </span>
-              <span className="text-sm font-mono text-white">
+              <span style={{ fontFamily: "'Space Mono', monospace", fontWeight: 700, fontSize: "0.8rem", color: "#000" }}>
                 {result.promptEngineeringScore} / 10
               </span>
             </div>
-            <div className="h-3 bg-surface-800/60 rounded-full overflow-hidden">
+            <div className="nb-progress-track overflow-hidden">
               <div
-                className="h-full bg-brand-400 rounded-full animate-progress"
+                className="nb-progress-fill"
                 style={{
                   width: `${(result.promptEngineeringScore / 10) * 100}%`,
+                  background: result.promptEngineeringScore / 10 >= 0.6 ? "#88D498" : "#FF6B6B",
                 }}
               />
             </div>
-            <p className="text-xs text-surface-500 mt-1">
+            <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.7rem", color: "#000", opacity: 0.5, marginTop: "4px" }}>
               {Math.round((result.promptEngineeringScore / 10) * 100)}% correct
             </p>
           </div>
@@ -267,32 +292,35 @@ export default function UserDetailPage() {
       </div>
 
       {/* Questions Section Header */}
-      <div className="flex items-center justify-between mb-5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
         <div>
-          <h2 className="font-display text-lg font-semibold text-white flex items-center gap-3">
+          <h2
+            style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontWeight: 700, fontSize: "1.125rem", color: "#000" }}
+          >
             Detailed Answers
-            <span className="tag bg-brand-500/10 text-brand-400 border border-brand-500/20">
-              {result.answers.length} questions
+            <span className="nb-badge nb-badge-info ml-2" style={{ fontSize: "0.6rem", padding: "2px 8px", verticalAlign: "middle" }}>
+              {result.answers.length}
             </span>
           </h2>
-          <p className="text-sm text-surface-500 mt-1">
-            <span className="text-correct">{correctCount} correct</span>
+          <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.7rem", marginTop: "4px" }}>
+            <span style={{ color: "#88D498", fontWeight: 700 }}>{correctCount} correct</span>
             {" · "}
-            <span className="text-incorrect">{incorrectCount} incorrect</span>
+            <span style={{ color: "#FF6B6B", fontWeight: 700 }}>{incorrectCount} incorrect</span>
           </p>
         </div>
         <button
           onClick={() =>
             setExpandedQuestion(expandedQuestion === -1 ? null : -1)
           }
-          className="btn-secondary text-sm"
+          className="nb-btn-secondary self-start sm:self-auto"
+          style={{ padding: "6px 14px", fontSize: "0.75rem" }}
         >
           {expandedQuestion === -1 ? "Collapse All" : "Expand All"}
         </button>
       </div>
 
       {/* Question Cards */}
-      <div className="space-y-4 mb-10">
+      <div className="space-y-3 sm:space-y-4 mb-10">
         {result.answers.map((answer, idx) => {
           const isExpanded =
             expandedQuestion === idx || expandedQuestion === -1;
@@ -300,20 +328,30 @@ export default function UserDetailPage() {
           return (
             <div
               key={idx}
-              className="glass-card glass-card-hover overflow-hidden"
+              className="overflow-hidden transition-all duration-150"
+              style={{
+                background: "#FFFDF5",
+                border: "2px solid #000",
+                boxShadow: isExpanded ? "4px 4px 0 0 #000" : "2px 2px 0 0 #000",
+              }}
             >
               {/* Collapsed Header */}
               <button
                 onClick={() => toggleQuestion(idx)}
-                className="w-full flex items-center gap-4 p-5 text-left"
+                className="w-full flex items-center gap-3 p-3 sm:p-4 text-left"
+                style={{ cursor: "pointer", background: "transparent", border: "none" }}
               >
                 {/* Question Number */}
                 <div
-                  className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 font-mono text-sm font-medium ${
-                    answer.isCorrect
-                      ? "bg-correct/10 text-correct"
-                      : "bg-incorrect/10 text-incorrect"
-                  }`}
+                  className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center shrink-0"
+                  style={{
+                    background: answer.isCorrect ? "#88D498" : "#FF6B6B",
+                    border: "2px solid #000",
+                    fontFamily: "'Space Mono', monospace",
+                    fontWeight: 700,
+                    fontSize: "0.75rem",
+                    color: "#000",
+                  }}
                 >
                   {answer.questionNumber}
                 </div>
@@ -321,51 +359,40 @@ export default function UserDetailPage() {
                 {/* Question text */}
                 <div className="flex-1 min-w-0">
                   <p
-                    className={`text-sm text-white font-medium ${!isExpanded ? "truncate" : ""}`}
+                    className={!isExpanded ? "truncate" : ""}
+                    style={{ fontFamily: "'Inter', system-ui, sans-serif", fontWeight: 500, fontSize: "0.8rem", color: "#000" }}
                   >
                     {answer.question}
                   </p>
-                  <div className="flex items-center gap-2 mt-1">
-                    <span className="tag bg-surface-800/60 text-surface-400 text-[10px]">
+                  <div className="flex flex-wrap items-center gap-1 mt-1">
+                    <span className="nb-badge nb-badge-neutral" style={{ fontSize: "0.55rem", padding: "1px 6px", boxShadow: "1px 1px 0 0 #000" }}>
                       {answer.category}
                     </span>
                     {answer.requiresJustification && (
-                      <span className="tag bg-warning/10 text-warning border border-warning/20 text-[10px]">
+                      <span className="nb-badge nb-badge-review" style={{ fontSize: "0.55rem", padding: "1px 6px", boxShadow: "1px 1px 0 0 #000" }}>
                         Justification
                       </span>
                     )}
                   </div>
                 </div>
 
-                {/* Status Badge */}
-                <div className="flex items-center gap-3 shrink-0">
+                {/* Status + Chevron */}
+                <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
                   {answer.isCorrect ? (
-                    <svg
-                      className="w-5 h-5 text-correct"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={2}
-                    >
+                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="#88D498" strokeWidth={3}>
                       <path d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                     </svg>
                   ) : (
-                    <svg
-                      className="w-5 h-5 text-incorrect"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={2}
-                    >
+                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="#FF6B6B" strokeWidth={3}>
                       <path d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                     </svg>
                   )}
                   <svg
-                    className={`w-4 h-4 text-surface-500 transition-transform duration-300 ${isExpanded ? "rotate-180" : ""}`}
+                    className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`}
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
+                    stroke="#000"
+                    strokeWidth={3}
                   >
                     <path d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                   </svg>
@@ -374,26 +401,26 @@ export default function UserDetailPage() {
 
               {/* Expanded Content */}
               {isExpanded && (
-                <div className="px-5 pb-5 animate-fade-in">
-                  <div className="border-t border-surface-700/30 pt-5 space-y-4">
+                <div className="px-3 sm:px-5 pb-4 sm:pb-5 animate-nb-slide-in">
+                  <div className="pt-4 space-y-3" style={{ borderTop: "2px solid #000" }}>
                     {/* Scenario Context */}
                     {answer.scenarioContext && (
-                      <div className="glass-justification p-4">
-                        <div className="flex items-start gap-3">
+                      <div className="p-3 sm:p-4" style={{ background: "#FFA552", border: "2px solid #000" }}>
+                        <div className="flex items-start gap-2">
                           <svg
-                            className="w-5 h-5 text-warning shrink-0 mt-0.5"
+                            className="w-4 h-4 shrink-0 mt-0.5"
                             fill="none"
                             viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth={1.5}
+                            stroke="#000"
+                            strokeWidth={2}
                           >
                             <path d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
                           </svg>
                           <div>
-                            <p className="text-xs font-medium text-warning mb-1">
+                            <p style={{ fontFamily: "'Space Mono', monospace", fontWeight: 700, fontSize: "0.65rem", textTransform: "uppercase", letterSpacing: "0.05em", color: "#000", marginBottom: "3px" }}>
                               Scenario
                             </p>
-                            <p className="text-sm text-surface-300">
+                            <p style={{ fontFamily: "'Inter', system-ui, sans-serif", fontSize: "0.8rem", color: "#000" }}>
                               {answer.scenarioContext}
                             </p>
                           </div>
@@ -408,22 +435,22 @@ export default function UserDetailPage() {
 
                     {/* Explanation */}
                     {answer.explanation && (
-                      <div className="rounded-2xl p-4 bg-info/10 border border-info/20" style={{ boxShadow: 'var(--shadow-clay-inset)' }}>
-                        <div className="flex items-start gap-3">
+                      <div className="p-3 sm:p-4" style={{ background: "#74B9FF", border: "2px solid #000" }}>
+                        <div className="flex items-start gap-2">
                           <svg
-                            className="w-5 h-5 text-info shrink-0 mt-0.5"
+                            className="w-4 h-4 shrink-0 mt-0.5"
                             fill="none"
                             viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth={1.5}
+                            stroke="#000"
+                            strokeWidth={2}
                           >
                             <path d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
                           </svg>
                           <div>
-                            <p className="text-xs font-display font-semibold text-info mb-1">
+                            <p style={{ fontFamily: "'Space Mono', monospace", fontWeight: 700, fontSize: "0.65rem", textTransform: "uppercase", letterSpacing: "0.05em", color: "#000", marginBottom: "3px" }}>
                               Explanation
                             </p>
-                            <p className="text-sm text-surface-300 leading-relaxed">
+                            <p style={{ fontFamily: "'Inter', system-ui, sans-serif", fontSize: "0.8rem", color: "#000", lineHeight: 1.5 }}>
                               {answer.explanation}
                             </p>
                           </div>
@@ -433,27 +460,27 @@ export default function UserDetailPage() {
 
                     {/* Justification */}
                     {answer.requiresJustification && (
-                      <div className="glass-justification p-5">
-                        <div className="flex items-start gap-3">
+                      <div className="p-3 sm:p-4" style={{ background: "#B8A9FA", border: "2px solid #000" }}>
+                        <div className="flex items-start gap-2">
                           <svg
-                            className="w-5 h-5 text-warning shrink-0 mt-0.5"
+                            className="w-4 h-4 shrink-0 mt-0.5"
                             fill="none"
                             viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth={1.5}
+                            stroke="#000"
+                            strokeWidth={2}
                           >
                             <path d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                           </svg>
                           <div className="flex-1">
-                            <p className="text-xs font-medium text-warning mb-2">
+                            <p style={{ fontFamily: "'Space Mono', monospace", fontWeight: 700, fontSize: "0.65rem", textTransform: "uppercase", letterSpacing: "0.05em", color: "#000", marginBottom: "6px" }}>
                               Developer&apos;s Justification
                             </p>
                             {answer.userJustification ? (
-                              <p className="text-sm text-surface-300 leading-relaxed">
+                              <p style={{ fontFamily: "'Inter', system-ui, sans-serif", fontSize: "0.8rem", color: "#000", lineHeight: 1.5 }}>
                                 {answer.userJustification}
                               </p>
                             ) : (
-                              <p className="text-sm text-surface-500 italic">
+                              <p style={{ fontFamily: "'Inter', system-ui, sans-serif", fontSize: "0.8rem", color: "#000", opacity: 0.5, fontStyle: "italic" }}>
                                 No justification provided
                               </p>
                             )}
@@ -473,20 +500,21 @@ export default function UserDetailPage() {
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-8">
         <button
           onClick={() => router.push("/admin/dashboard")}
-          className="btn-secondary"
+          className="nb-btn-secondary"
+          style={{ padding: "8px 16px", fontSize: "0.8rem" }}
         >
           <svg
             className="w-4 h-4"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            strokeWidth={2}
+            strokeWidth={2.5}
           >
             <path d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
           </svg>
           Back to Dashboard
         </button>
-        <p className="text-surface-500 text-xs">
+        <p style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.65rem", color: "#000", opacity: 0.4 }}>
           TM Systems Pvt. Ltd. — AI Foundations Training Programme
         </p>
       </div>
@@ -528,53 +556,63 @@ function renderOptions(answer: FirestoreAnswer) {
   options.sort((a, b) => a.index - b.index);
 
   return options.map((opt) => {
-    let containerClass = "glass-neutral rounded-xl p-4";
+    let bgColor = "#FFFDF5";
+    let leftBorder = "";
     let label = "";
 
     if (opt.isCorrect && opt.isUserPick) {
-      containerClass = "glass-correct rounded-xl p-4";
-      label = "✓ Your Answer (Correct)";
+      bgColor = "#88D498";
+      leftBorder = "4px solid #88D498";
+      label = "Your Answer (Correct)";
     } else if (opt.isCorrect) {
-      containerClass = "glass-correct rounded-xl p-4";
-      label = "✓ Correct Answer";
+      bgColor = "#88D49840";
+      leftBorder = "4px solid #88D498";
+      label = "Correct Answer";
     } else if (opt.isUserPick) {
-      containerClass = "glass-incorrect rounded-xl p-4";
-      label = "✗ Your Answer";
+      bgColor = "#FF6B6B40";
+      leftBorder = "4px solid #FF6B6B";
+      label = "Your Answer";
     }
 
     return (
-      <div key={opt.index} className={containerClass}>
-        <div className="flex items-start gap-3">
+      <div
+        key={opt.index}
+        className="p-3"
+        style={{
+          background: bgColor,
+          border: "2px solid #000",
+          borderLeft: leftBorder || "2px solid #000",
+        }}
+      >
+        <div className="flex items-start gap-2">
           <span
-            className={`w-7 h-7 rounded-lg flex items-center justify-center font-mono text-xs font-medium shrink-0 ${
-              opt.isCorrect
-                ? "bg-correct/20 text-correct"
-                : opt.isUserPick
-                  ? "bg-incorrect/20 text-incorrect"
-                  : "bg-surface-700/60 text-surface-400"
-            }`}
+            className="w-7 h-7 flex items-center justify-center shrink-0"
+            style={{
+              background: opt.isCorrect ? "#88D498" : opt.isUserPick ? "#FF6B6B" : "#F5F0E8",
+              border: "2px solid #000",
+              fontFamily: "'Space Mono', monospace",
+              fontWeight: 700,
+              fontSize: "0.7rem",
+              color: "#000",
+            }}
           >
             {letters[opt.index] || opt.index + 1}
           </span>
           <div className="flex-1 min-w-0">
-            <p
-              className={`text-sm ${
-                opt.isCorrect
-                  ? "text-correct"
-                  : opt.isUserPick
-                    ? "text-incorrect"
-                    : "text-surface-400"
-              }`}
-            >
+            <p style={{ fontFamily: "'Inter', system-ui, sans-serif", fontSize: "0.8rem", color: "#000" }}>
               {opt.text}
             </p>
             {label && (
-              <p
-                className={`text-xs mt-1 font-medium ${
-                  opt.isCorrect ? "text-correct/70" : "text-incorrect/70"
-                }`}
-              >
-                {label}
+              <p style={{
+                fontFamily: "'Space Mono', monospace",
+                fontSize: "0.6rem",
+                fontWeight: 700,
+                marginTop: "3px",
+                color: "#000",
+                textTransform: "uppercase",
+                letterSpacing: "0.05em",
+              }}>
+                {opt.isCorrect ? "\u2713" : "\u2717"} {label}
               </p>
             )}
           </div>
