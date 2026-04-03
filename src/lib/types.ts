@@ -13,6 +13,7 @@ export interface QuizQuestion {
   scenarioContext?: string;
   justificationHint?: string;
   explanation?: string;
+  hint?: string;
 }
 
 export interface GeneratedQuiz {
