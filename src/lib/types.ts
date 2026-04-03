@@ -36,6 +36,7 @@ export interface AnswerDetail {
   justificationHint: string | null;
   userJustification: string | null;
   explanation: string | null;
+  hintUsed: boolean;
 }
 
 export interface QuizResults {
@@ -68,6 +69,7 @@ export interface FirestoreAnswer {
   scenarioContext: string | null;
   userJustification: string | null;
   explanation: string | null;
+  hintUsed: boolean;
 }
 
 export interface FirestoreQuizDocument {

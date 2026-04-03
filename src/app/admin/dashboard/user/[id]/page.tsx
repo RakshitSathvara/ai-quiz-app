@@ -142,6 +142,7 @@ export default function UserDetailPage() {
 
   const correctCount = result.answers.filter((a) => a.isCorrect).length;
   const incorrectCount = result.answers.length - correctCount;
+  const hintUsedCount = result.answers.filter((a) => a.hintUsed).length;
 
   return (
     <div className="min-h-screen bg-nb-white p-4 sm:p-6 lg:p-8 max-w-5xl mx-auto animate-nb-slide-in">
@@ -306,6 +307,12 @@ export default function UserDetailPage() {
             <span style={{ color: "#88D498", fontWeight: 700 }}>{correctCount} correct</span>
             {" · "}
             <span style={{ color: "#FF6B6B", fontWeight: 700 }}>{incorrectCount} incorrect</span>
+            {hintUsedCount > 0 && (
+              <>
+                {" · "}
+                <span style={{ color: "#D4A017", fontWeight: 700 }}>{hintUsedCount} hint{hintUsedCount !== 1 ? "s" : ""} used</span>
+              </>
+            )}
           </p>
         </div>
         <button
@@ -368,6 +375,22 @@ export default function UserDetailPage() {
                     <span className="nb-badge nb-badge-neutral" style={{ fontSize: "0.55rem", padding: "1px 6px", boxShadow: "1px 1px 0 0 #000" }}>
                       {answer.category}
                     </span>
+                    {answer.hintUsed && (
+                      <span
+                        className="nb-badge"
+                        style={{
+                          fontSize: "0.55rem",
+                          padding: "1px 6px",
+                          boxShadow: "1px 1px 0 0 #000",
+                          background: "#FFD23F",
+                          border: "1.5px solid #000",
+                          color: "#000",
+                          fontWeight: 700,
+                        }}
+                      >
+                        Hint Used
+                      </span>
+                    )}
                     {answer.requiresJustification && (
                       <span className="nb-badge nb-badge-review" style={{ fontSize: "0.55rem", padding: "1px 6px", boxShadow: "1px 1px 0 0 #000" }}>
                         Justification

@@ -55,6 +55,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         scenarioContext: detail.scenarioContext || null,
         userJustification: detail.userJustification || null,
         explanation: detail.explanation || null,
+        hintUsed: detail.hintUsed || false,
       })
     );
 

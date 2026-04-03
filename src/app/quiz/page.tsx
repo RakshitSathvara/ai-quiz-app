@@ -84,6 +84,7 @@ export default function QuizPage() {
         justificationHint: q.justificationHint || null,
         userJustification: justifications[q.id] || null,
         explanation: q.explanation || null,
+        hintUsed: !!showHints[q.id],
       });
     });
 
